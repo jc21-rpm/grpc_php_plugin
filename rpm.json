@@ -1,0 +1,7 @@
+{
+  "publish": {
+    "PACKAGE": "grpc_php_plugin",
+    "GH_USER": "jc21-rpm",
+    "VERSION": "1.70.1"
+  }
+}
