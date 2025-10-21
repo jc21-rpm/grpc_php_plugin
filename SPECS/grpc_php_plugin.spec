@@ -4,7 +4,7 @@
 %global __strip /bin/true
 
 Name:           grpc_php_plugin
-Version:        1.75.1
+Version:        1.76.0
 Release:        1%{?dist}
 Summary:        A PHP plugin for the C based gRPC protoc command
 License:        Apache-2.0
@@ -40,6 +40,9 @@ rm -rf %{buildroot}
 /usr/bin/%{name}
 
 %changelog
+* Tue Oct 21 2025 Jamie Curnow <jc@jc21.com> - 1.76.0-1
+- v1.76.0
+
 * Tue Sep 30 2025 Jamie Curnow <jc@jc21.com> - 1.75.1-1
 - v1.75.1
 
