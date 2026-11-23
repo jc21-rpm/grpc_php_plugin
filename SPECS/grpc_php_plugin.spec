@@ -10,6 +10,10 @@ Summary:        A PHP plugin for the C based gRPC protoc command
 License:        Apache-2.0
 URL:            https://github.com/grpc/grpc
 BuildRequires:  git cmake
+# Bundled abseil requires GCC >= 10; el8 ships GCC 8.5
+%if 0%{?rhel} == 8
+BuildRequires:  gcc-toolset-13-gcc-c++
+%endif
 
 %description
 %{summary}.
@@ -18,8 +22,13 @@ BuildRequires:  git cmake
 git clone -b v%{version} --depth 1 https://github.com/grpc/grpc grpc
 cd grpc
 git submodule update --init
+# GCC 14 (el10, x86-64-v3 => __BMI2__) forbids including <bmi2intrin.h> directly
+sed -i 's|#include <bmi2intrin.h>|#include <immintrin.h>|' third_party/abseil-cpp/absl/container/internal/raw_hash_set.h
 
 %build
+%if 0%{?rhel} == 8
+source /opt/rh/gcc-toolset-13/enable
+%endif
 mkdir -p grpc/cmake/build
 cd grpc/cmake/build
 cmake ../..
